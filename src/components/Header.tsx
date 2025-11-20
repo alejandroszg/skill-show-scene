@@ -40,7 +40,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <a href="#home" className="text-2xl font-bold text-foreground">
+            <a href="#home" className={`text-2xl font-bold transition-colors ${isScrolled ? 'text-foreground' : 'text-background'}`}>
               Creative<span className="text-secondary">Studio</span>
             </a>
           </motion.div>
@@ -54,7 +54,9 @@ const Header = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className="text-foreground hover:text-secondary transition-colors duration-300 relative group"
+                className={`transition-colors duration-300 relative group ${
+                  isScrolled ? 'text-foreground' : 'text-background'
+                } hover:text-secondary`}
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full" />
@@ -68,7 +70,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-foreground"
+            className={`md:hidden transition-colors ${isScrolled ? 'text-foreground' : 'text-background'}`}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
