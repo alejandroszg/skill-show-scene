@@ -28,19 +28,11 @@ const Footer = () => {
     "Photography",
   ];
 
-  const quickLinks = [
-    { label: "About Us", href: "#" },
-    { label: "Our Services", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Testimonials", href: "#reviews" },
-    { label: "Contact", href: "#contact" },
-    { label: "Privacy Policy", href: "#" },
-  ];
 
   return (
     <footer id="contact" className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           {/* Company Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -94,28 +86,6 @@ const Footer = () => {
                     className="text-primary-foreground/80 hover:text-secondary transition-colors duration-300"
                   >
                     {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h4 className="text-xl font-bold mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/80 hover:text-secondary transition-colors duration-300"
-                  >
-                    {link.label}
                   </a>
                 </li>
               ))}
