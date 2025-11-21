@@ -1,15 +1,8 @@
 import { motion } from "framer-motion";
-import { MessageCircle, CheckCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CallToAction = () => {
-  const benefits = [
-    "Fast turnaround time on all projects",
-    "Personalized attention to your brand",
-    "Expert team with years of experience",
-    "Competitive pricing and flexible packages",
-  ];
-
   const handleWhatsAppClick = () => {
     window.open("https://wa.me/1234567890", "_blank");
   };
@@ -32,22 +25,6 @@ const CallToAction = () => {
             Get in touch now and start your journey to success.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex items-start gap-3 text-left"
-              >
-                <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-                <p className="text-foreground">{benefit}</p>
-              </motion.div>
-            ))}
-          </div>
-
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -57,7 +34,7 @@ const CallToAction = () => {
             <Button
               onClick={handleWhatsAppClick}
               size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-8 py-6 gap-3"
+              className="text-lg px-8 py-6 gap-3"
             >
               <MessageCircle className="w-6 h-6" />
               Contact via WhatsApp

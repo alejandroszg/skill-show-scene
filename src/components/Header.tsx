@@ -62,7 +62,7 @@ const Header = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full" />
               </motion.a>
             ))}
-            <Button variant="default" className="bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button variant="default">
               Get in Touch
             </Button>
           </nav>
@@ -82,7 +82,7 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 pb-4"
+            className="md:hidden mt-4 pb-4 bg-background/95 backdrop-blur-md rounded-lg p-4 shadow-lg"
           >
             {menuItems.map((item) => (
               <a
@@ -94,7 +94,7 @@ const Header = () => {
                 {item.label}
               </a>
             ))}
-            <Button variant="default" className="w-full mt-4 bg-accent text-accent-foreground">
+            <Button variant="default" className="w-full mt-4">
               Get in Touch
             </Button>
           </motion.nav>
