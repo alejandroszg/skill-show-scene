@@ -19,6 +19,7 @@ interface Project {
   description: string;
   details: string;
   technologies: string[];
+  size: "large" | "wide" | "tall" | "regular";
 }
 
 const projects: Project[] = [
@@ -31,6 +32,7 @@ const projects: Project[] = [
     details:
       "Built a comprehensive e-commerce platform with real-time inventory management, advanced search and filtering capabilities, secure payment integration, and a seamless checkout experience. The site achieved a 98/100 PageSpeed score and increased conversion rates by 45%.",
     technologies: ["React", "Node.js", "Stripe", "MongoDB"],
+    size: "large",
   },
   {
     id: 2,
@@ -41,6 +43,7 @@ const projects: Project[] = [
     details:
       "Developed a sophisticated brand identity system including logo design, color palette, typography guidelines, and packaging design. Created a cohesive visual language that elevated the brand's premium positioning and increased brand recognition by 65%.",
     technologies: ["Illustrator", "Photoshop", "InDesign"],
+    size: "regular",
   },
   {
     id: 3,
@@ -51,6 +54,7 @@ const projects: Project[] = [
     details:
       "Executed a comprehensive photography campaign featuring studio portraits, product shots, and lifestyle imagery. Delivered over 500 professionally edited photos that enhanced the brand's visual storytelling and increased social media engagement by 120%.",
     technologies: ["Canon 5D Mark IV", "Profoto", "Lightroom"],
+    size: "tall",
   },
   {
     id: 4,
@@ -61,6 +65,7 @@ const projects: Project[] = [
     details:
       "Designed and developed a fully responsive corporate website with custom CMS, multi-language support, and advanced SEO optimization. Implemented seamless animations and intuitive navigation that reduced bounce rate by 35% and improved user engagement.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS"],
+    size: "wide",
   },
   {
     id: 5,
@@ -71,6 +76,7 @@ const projects: Project[] = [
     details:
       "Created and managed a comprehensive social media campaign across Instagram, Facebook, and TikTok. Developed engaging content calendars, interactive stories, and influencer partnerships that grew the follower base by 250% and generated 2M+ impressions monthly.",
     technologies: ["Instagram", "Facebook", "TikTok", "Canva"],
+    size: "regular",
   },
   {
     id: 6,
@@ -81,6 +87,7 @@ const projects: Project[] = [
     details:
       "Reimagined a fashion brand's entire visual identity with a focus on sustainability and modern aesthetics. Developed new logo, brand guidelines, packaging design, and marketing collateral that helped the brand achieve a 40% increase in market share.",
     technologies: ["Adobe Creative Suite", "Figma", "Blender"],
+    size: "regular",
   },
 ];
 
@@ -142,39 +149,55 @@ const Portfolio = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <Badge className="mb-3 bg-secondary text-foreground">
-                      {project.category}
-                    </Badge>
-                    <h3 className="text-xl font-bold text-primary-foreground mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-primary-foreground/90 text-sm">
-                      {project.description}
-                    </p>
-                    <ExternalLink className="absolute top-6 right-6 text-primary-foreground" size={20} />
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[280px] gap-6">
+          {filteredProjects.map((project, index) => {
+            const getSizeClasses = () => {
+              switch (project.size) {
+                case "large":
+                  return "md:col-span-2 md:row-span-2";
+                case "wide":
+                  return "md:col-span-2";
+                case "tall":
+                  return "md:row-span-2";
+                default:
+                  return "";
+              }
+            };
+
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`group cursor-pointer ${getSizeClasses()}`}
+                onClick={() => setSelectedProject(project)}
+              >
+                <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <Badge className="mb-3 bg-secondary text-foreground">
+                        {project.category}
+                      </Badge>
+                      <h3 className="text-xl font-bold text-primary-foreground mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-primary-foreground/90 text-sm">
+                        {project.description}
+                      </p>
+                      <ExternalLink className="absolute top-6 right-6 text-primary-foreground" size={20} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
